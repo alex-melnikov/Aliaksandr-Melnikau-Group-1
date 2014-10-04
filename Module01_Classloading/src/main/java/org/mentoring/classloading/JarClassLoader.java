@@ -59,7 +59,7 @@ public class JarClassLoader extends ClassLoader {
 		// first try to find class in the cache
 		Class<?> result = findLoadedClass(name);
 		if (result != null) {
-			logger.info("CLASS " + name + "found in cache");
+			logger.info("CLASS " + name + "FOUND IN CACHE");
 			return result;
 		}
 		// than try to load class by parent
