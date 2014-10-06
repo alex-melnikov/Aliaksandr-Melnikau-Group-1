@@ -9,6 +9,7 @@ import java.util.Enumeration;
 import java.util.NoSuchElementException;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -56,41 +57,32 @@ public class JarClassLoader extends ClassLoader {
 
 	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
-		// first try to find class in the cache
-		Class<?> result = findLoadedClass(name);
-		if (result != null) {
-			logger.info("CLASS " + name + "FOUND IN CACHE");
-			return result;
-		}
-		// than try to load class by parent
+
+		// Load class using this loader
+		JarFile file = null;
+		InputStream in = null;
+		ByteArrayOutputStream out = null;
 		try {
-			result = getParent().loadClass(name);
-			logger.info("CLASS IS LOADED BY PARENT");
-			return result;
-		} catch (ClassNotFoundException e) {
-			// Load class using this loader
-			try {
-				JarFile file;
-				file = new JarFile(jar);
-				JarEntry entry = file.getJarEntry(name.replace('.', '/')
-						+ ".class");
-				if (entry == null) {
-					throw new ClassNotFoundException(name);
-				}
-				byte[] array = new byte[1024];
-				InputStream in = file.getInputStream(entry);
-				ByteArrayOutputStream out = new ByteArrayOutputStream(
-						array.length);
-				int length = in.read(array);
-				while (length > 0) {
-					out.write(array, 0, length);
-					length = in.read(array);
-				}
-				return defineClass(name, out.toByteArray(), 0, out.size());
-			} catch (IOException exception) {
-				logger.error("CLASS FILE NOT FOUND");
-				throw new ClassNotFoundException(name, exception);
+			file = new JarFile(jar);
+			JarEntry entry = file
+					.getJarEntry(name.replace('.', '/') + ".class");
+			if (entry == null) {
+				throw new ClassNotFoundException(name);
 			}
+			byte[] array = new byte[1024];
+			in = file.getInputStream(entry);
+			out = new ByteArrayOutputStream(array.length);
+			int length = in.read(array);
+			while (length > 0) {
+				out.write(array, 0, length);
+				length = in.read(array);
+			}
+			return defineClass(name, out.toByteArray(), 0, out.size());
+		} catch (IOException exception) {
+			logger.error("CLASS FILE NOT FOUND");
+			throw new ClassNotFoundException(name, exception);
+		} finally {
+			closeResources(file, in, out);
 		}
 	}
 
@@ -128,5 +120,41 @@ public class JarClassLoader extends ClassLoader {
 				throw new NoSuchElementException();
 			}
 		};
+	}
+
+	/**
+	 * This method close resources
+	 * 
+	 * @param file
+	 *            JarFile
+	 * @param in
+	 *            InputStream
+	 * @param out
+	 *            ByteArrayOutputStream
+	 */
+	private static void closeResources(JarFile file, InputStream in,
+			ByteArrayOutputStream out) {
+		// Each recourse is closed in the separate try catch block to be sure
+		// that other will
+		// be closed if something will go wrong with first o second
+		if (file != null) {
+			try {
+				file.close();
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		}
+		if (in != null)
+			try {
+				in.close();
+			} catch (IOException e) {
+				logger.error(e);
+			}
+		if (out != null)
+			try {
+				out.close();
+			} catch (IOException e) {
+				logger.error(e);
+			}
 	}
 }
