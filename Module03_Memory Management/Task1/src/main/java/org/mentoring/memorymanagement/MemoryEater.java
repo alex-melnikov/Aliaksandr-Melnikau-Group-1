@@ -17,15 +17,15 @@ public class MemoryEater {
 			byte b[] = new byte[1048576];
 			v.add(b);
 			Runtime rt = Runtime.getRuntime();
-
+			v.remove(0);
 			logger.info("free memory: " + rt.freeMemory());
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				logger.error(e);
-				{
-				}
-			}
+//			try {
+//				Thread.sleep(10000);
+//			} catch (InterruptedException e) {
+//				logger.error(e);
+//				{
+//				}
+//			}
 		}
 	}
 }
