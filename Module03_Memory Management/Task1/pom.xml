@@ -31,7 +31,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>org.mentoring.memorymanagement.MemoryEatrer</mainClass>
+							<mainClass>org.mentoring.memorymanagement.MemoryEater</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
