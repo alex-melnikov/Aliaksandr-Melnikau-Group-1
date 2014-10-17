@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.mentoring.memorymanagement</groupId>
-	<artifactId>HeapOutOfMemory</artifactId>
+	<artifactId>PermGenOutOfMemory</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
-	<name>HeapOutOfMemory</name>
+	<name>PermGenOutOfMemory</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -30,7 +30,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>org.mentoring.memorymanagement.HeapOutOfMemory</mainClass>
+							<mainClass>org.mentoring.memorymanagement.PermGenOutOfMemory</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
