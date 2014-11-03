@@ -12,167 +12,160 @@ import org.mentoring.bank.person.Person;
 
 public class Account extends Thread {
 
-	private long number;
-	private Amount amount;
-	private Person person;
+    private long          number;
+    private Amount        amount;
+    private Person        person;
 
-	private Bank bank;
+    private Bank          bank;
 
-	/**
-	 * Logger
-	 */
-	private static Logger logger = LogManager.getLogger("logger");
+    /**
+     * Logger
+     */
+    private static Logger logger = LogManager.getLogger("logger");
 
-	public Account() {
-		super();
-	}
+    public Account() {
+        super();
+    }
 
-	public Account(long number, Amount amount, Person person, Bank bank) {
-		super();
-		this.number = number;
-		this.amount = amount;
-		this.person = person;
-		this.bank = bank;
-	}
+    public Account(final Amount amount, final Person person, final Bank bank) {
+        super();
+        this.amount = amount;
+        this.person = person;
+        this.bank = bank;
+    }
 
-	public Account(Amount amount, Person person, Bank bank) {
-		super();
-		this.amount = amount;
-		this.person = person;
-		this.bank = bank;
-	}
+    public Account(final long number, final Amount amount, final Person person, final Bank bank) {
+        super();
+        this.number = number;
+        this.amount = amount;
+        this.person = person;
+        this.bank = bank;
+    }
 
-	public long getNumber() {
-		return number;
-	}
+    public void addAmount(final BigDecimal amount) {
+        this.amount.setAmount(this.amount.getAmount().add(amount));
+        Account.logger.info(this.toString() + " encreased to " + amount);
+    }
 
-	public void setNumber(long number) {
-		this.number = number;
-	}
+    public synchronized Amount getAmount() {
+        return this.amount;
+    }
 
-	public synchronized Amount getAmount() {
-		return amount;
-	}
+    public Bank getBank() {
+        return this.bank;
+    }
 
-	public void setAmount(Amount amount) {
-		this.amount = amount;
-	}
+    public long getNumber() {
+        return this.number;
+    }
 
-	public Person getPerson() {
-		return person;
-	}
+    public Person getPerson() {
+        return this.person;
+    }
 
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+    public void reduceAmount(final BigDecimal amount) {
+        this.amount.setAmount(this.amount.getAmount().subtract(amount));
+        Account.logger.info(this.toString() + " reduced to " + amount);
+    }
 
-	public void addAmount(BigDecimal amount) {
-		this.amount.setAmount(this.amount.getAmount().add(amount));
-		logger.info(this.toString() + " encreased to " + amount);
-	}
+    @Override
+    public void run() {
+        try {
+            this.doMoneyTransfering();
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public void reduceAmount(BigDecimal amount) {
-		this.amount.setAmount(this.amount.getAmount().subtract(amount));
-		logger.info(this.toString() + " reduced to " + amount);
-	}
+    public void setAmount(final Amount amount) {
+        this.amount = amount;
+    }
 
-	public Bank getBank() {
-		return bank;
-	}
+    public void setBank(final Bank bank) {
+        this.bank = bank;
+    }
 
-	public void setBank(Bank bank) {
-		this.bank = bank;
-	}
+    public void setNumber(final long number) {
+        this.number = number;
+    }
 
-	public void run() {
-		try {
-			doMoneyTransfering();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+    public void setPerson(final Person person) {
+        this.person = person;
+    }
 
-	private BigDecimal getAmountToTransfer() {
-		BigDecimal randFromDouble = new BigDecimal(Math.random());
-		BigDecimal amount = randFromDouble.multiply(this.getAmount()
-				.getAmount());
-		return amount.divide(new BigDecimal(0.5), 2, RoundingMode.HALF_DOWN);
-	}
+    @Override
+    public String toString() {
+        return "NUMBER " + this.getNumber() + "; AMOUNT " + this.amount;
+    }
 
-	private Account getAccountToTransfer() {
-		if (getBank().getAccounts().size() == 1) {
-			return this;
-		}
-		Random random = new Random();
-		int accountToTransferNumber = random.nextInt(getBank().getAccounts()
-				.size() - 1);
-		return getBank().getAccounts().get(accountToTransferNumber);
-	}
+    public void tronsferMoney(final Account other, final BigDecimal amount)
+            throws InterruptedException {
+        if (other == this) {
+            return;
+        } else {
+            if (System.identityHashCode(this) < System.identityHashCode(other)) {
+                synchronized (this) {
+                    synchronized (other) {
+                        // if (!this.bank.getRevisor().isRevisionInProgress()) {
+                        this.reduceAmount(amount);
+                        other.addAmount(amount);
+                        // }
+                    }
+                }
+            } else {
+                synchronized (other) {
+                    synchronized (this) {
+                        // if (!this.bank.getRevisor().isRevisionInProgress()) {
+                        other.addAmount(amount);
+                        this.reduceAmount(amount);
+                        // }
+                    }
+                }
+            }
+        }
+    }
 
-	private synchronized void waitForMoneyTransfering()
-			throws InterruptedException {
-		while (bank.getRevisor().isRevisionInProgress() && !bank.isStopped()) {
-			wait();
-		}
-	}
+    private void doMoneyTransfering() throws InterruptedException {
+        while (this.bank.isStarted() && !this.bank.isStopped()) {
+            this.waitForMoneyTransfering();
+            final BigDecimal amountToTransfer = this.getAmountToTransfer();
+            if (this.isMoreThanZero(amountToTransfer) && this.isEnoughMoney(amountToTransfer)) {
+                final Account account = this.getAccountToTransfer();
+                Account.logger.info(this.toString() + " wants to transfer " + amountToTransfer
+                        + " to " + account.toString());
+                this.tronsferMoney(account, amountToTransfer);
+                Account.logger.info(this.toString() + " transfered " + amountToTransfer + " to "
+                        + account.toString());
+            }
+        }
+    }
 
-	public void tronsferMoney(Account other, BigDecimal amount)
-			throws InterruptedException {
-		if (other == this)
-			return;
-		else if (System.identityHashCode(this) < System.identityHashCode(other)) {
-			synchronized (this) {
-				synchronized (other) {
-					if (!bank.getRevisor().isRevisionInProgress()) {
-						this.reduceAmount(amount);
-						other.addAmount(amount);
-					}
-				}
-			}
-		} else {
-			synchronized (other) {
-				synchronized (this) {
-					if (!bank.getRevisor().isRevisionInProgress()) {
-						other.addAmount(amount);
-						this.reduceAmount(amount);
-					}
-				}
-			}
-		}
-	}
+    private Account getAccountToTransfer() {
+        if (this.getBank().getAccounts().size() == 1) {
+            return this;
+        }
+        final Random random = new Random();
+        final int accountToTransferNumber = random.nextInt(this.getBank().getAccounts().size() - 1);
+        return this.getBank().getAccounts().get(accountToTransferNumber);
+    }
 
-	private boolean isEnoughMoney(BigDecimal amountToTransfer) {
-		return amountToTransfer.compareTo(getAmount().getAmount()) < 0;
-	}
+    private BigDecimal getAmountToTransfer() {
+        final BigDecimal randFromDouble = new BigDecimal(Math.random());
+        final BigDecimal amount = randFromDouble.multiply(this.getAmount().getAmount());
+        return amount.divide(new BigDecimal(0.5), 2, RoundingMode.HALF_DOWN);
+    }
 
-	private boolean isMoreThanZero(BigDecimal amount) {
-		return amount.compareTo(new BigDecimal(0)) > 0;
-	}
+    private boolean isEnoughMoney(final BigDecimal amountToTransfer) {
+        return amountToTransfer.compareTo(this.getAmount().getAmount()) < 0;
+    }
 
-	private void doMoneyTransfering() throws InterruptedException {
-		boolean isFinished = false;
-		while (bank.isStarted() && !bank.isStopped() && !isFinished) {
-			waitForMoneyTransfering();
-			BigDecimal amountToTransfer = getAmountToTransfer();
-			if (!isEnoughMoney(amountToTransfer)) {
-				logger.info(toString() + " want to transfer "
-						+ amountToTransfer + " but does not have enough");
-				isFinished = true;
-			} else {
-				if (isMoreThanZero(amountToTransfer)) {
-					Account account = getAccountToTransfer();
-					logger.info(this.toString() + " wants to transfer "
-							+ amountToTransfer + " to " + account.toString());
-					tronsferMoney(account, amountToTransfer);
-					logger.info(this.toString() + " transfered "
-							+ amountToTransfer + " to " + account.toString());
-				}
-			}
-		}
-	}
+    private boolean isMoreThanZero(final BigDecimal amount) {
+        return amount.compareTo(new BigDecimal(0)) > 0;
+    }
 
-	@Override
-	public String toString() {
-		return "NUMBER " + getNumber() + "; AMOUNT " + amount;
-	}
+    private synchronized void waitForMoneyTransfering() throws InterruptedException {
+        while (this.bank.getRevisor().isRevisionInProgress() && !this.bank.isStopped()) {
+            this.wait();
+        }
+    }
 }
