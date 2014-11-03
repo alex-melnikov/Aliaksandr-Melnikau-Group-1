@@ -2,8 +2,6 @@ package org.mentoring.bank;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -16,8 +14,6 @@ public class Revisor implements Runnable {
 	private volatile boolean isRevisionInProgress;
 
 	private static Logger logger = LogManager.getLogger("logger");
-
-	private ReadWriteLock lock = new ReentrantReadWriteLock();
 
 	public Revisor() {
 		super();
@@ -59,21 +55,10 @@ public class Revisor implements Runnable {
 	}
 
 	public boolean isRevisionInProgress() {
-//		lock.readLock().lock();
-//		try {
-			return isRevisionInProgress;
-//		} finally {
-//			lock.readLock().unlock();
-//		}
-
+		return isRevisionInProgress;
 	}
 
 	public void setRevisionInProgress(boolean isRevisionInProgress) {
-//		lock.writeLock().lock();
-//		try {
-			this.isRevisionInProgress = isRevisionInProgress;
-//		} finally {
-//			lock.writeLock().lock();
-//		}
+		this.isRevisionInProgress = isRevisionInProgress;
 	}
 }
