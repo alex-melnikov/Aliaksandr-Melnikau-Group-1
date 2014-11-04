@@ -50,7 +50,9 @@ public class Revisor implements Runnable {
 
 		setRevisionInProgress(false);
 		for (Account account : accounts) {
-			account.notify();
+			synchronized (account) {
+				account.notify();
+			}
 		}
 	}
 

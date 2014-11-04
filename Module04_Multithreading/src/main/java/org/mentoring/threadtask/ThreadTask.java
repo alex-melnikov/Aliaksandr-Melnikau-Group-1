@@ -53,10 +53,9 @@ public class ThreadTask {
 			case 1:
 				Revisor revisor = new Revisor(bank);
 				bank.setRevisor(revisor);
-				scheduledExecutorService.
-				scheduleWithFixedDelay(revisor,
-						0, 5, TimeUnit.SECONDS);
 				bank.start();
+				scheduledExecutorService.scheduleAtFixedRate(revisor,
+						5, 5, TimeUnit.SECONDS);
 				isNotSelectedOption = false;
 				break;
 			default:

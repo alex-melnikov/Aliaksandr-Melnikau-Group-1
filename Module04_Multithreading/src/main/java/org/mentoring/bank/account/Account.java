@@ -153,6 +153,7 @@ public class Account extends Thread {
 				Account.logger.info(this.toString() + " wants to transfer "
 						+ amountToTransfer + " to " + account.toString());
 				this.tronsferMoney(account, amountToTransfer);
+				Thread.sleep(1000);
 			}
 		}
 	}

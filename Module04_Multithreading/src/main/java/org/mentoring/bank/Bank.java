@@ -141,7 +141,6 @@ public class Bank {
 		this.setStarted(true);
 		final List<Account> accounts = this.getAccounts();
 		for (final Account account : accounts) {
-			account.setPriority(10);
 			account.start();
 		}
 	}
