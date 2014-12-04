@@ -2,11 +2,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.mentoring.jpatask</groupId>
-    <artifactId>JPATask</artifactId>
+    <groupId>org.mentoring.threadtask</groupId>
+    <artifactId>ThreadTask</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>JPATask</name>
+    <name>ThreadTask</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -31,7 +31,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.mentoring.threadtask.JPATask</mainClass>
+                            <mainClass>org.mentoring.threadtask.ThreadTask</mainClass>
                             <classpathPrefix>dependency-jars/</classpathPrefix>
                         </manifest>
                     </archive>
@@ -69,10 +69,5 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-       </dependencies>
+    </dependencies>
 </project>
