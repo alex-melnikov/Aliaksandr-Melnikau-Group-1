@@ -16,9 +16,9 @@ import org.mentoring.employee.Employee;
 public class Project {
 	@Id
 	private Long id;
-	
+
 	private String name;
-	
+
 	@ManyToMany
 	@JoinTable(
 	name = "employee_projects",
@@ -49,5 +49,4 @@ public class Project {
 	public void setEmployees(Collection<Employee> employees) {
 		this.employees = employees;
 	}
-	
 }
