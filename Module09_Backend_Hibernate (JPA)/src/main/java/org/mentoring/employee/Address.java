@@ -1,13 +1,26 @@
 package org.mentoring.employee;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 
 @Embeddable
-// @Access(AccessType.FIELD)
+@Access(AccessType.FIELD)
 public class Address {
 	private String city;
 	
 	private String street;
+
+	public Address() {
+		super();
+	}
+
+	
+	public Address(String city, String street) {
+		super();
+		this.city = city;
+		this.street = street;
+	}
 
 	public String getCity() {
 		return city;
@@ -23,5 +36,10 @@ public class Address {
 
 	public void setStreet(String street) {
 		this.street = street;
+	}
+	
+	@Override
+	public String toString() {
+		return "city " + this.getCity() + "; street " + this.getStreet();
 	}
 }

@@ -5,6 +5,6 @@ public interface EmployeeService {
 	void deleteEmployee(Long id);
 	Employee findEmployee(Long id);
 	void updateEmployee(Employee emploeey, Long id);
-	void assignEmployeeToProject(int empId, int projectId);
-	void addEmployeeToUnit(int empId, int uniId);
+	void assignEmployeeToProject(Long empId, Long projectId);
+	void addEmployeeToUnit(Long empId, Long uniId);
 }

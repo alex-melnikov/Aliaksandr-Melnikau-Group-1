@@ -1,0 +1,50 @@
+2014-12-06 17:42:57,319 WARN [org.hibernate.ejb.HibernatePersistence] main  HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-12-06 17:42:57,322 WARN [org.hibernate.ejb.HibernatePersistence] main  HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-12-06 17:42:57,322 WARN [org.hibernate.ejb.HibernatePersistence] main  HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-12-06 17:42:57,542 INFO [org.hibernate.jpa.internal.util.LogHelper] main  HHH000204: Processing PersistenceUnitInfo [
+	name: db-manager
+	...]
+2014-12-06 17:42:57,710 INFO [org.hibernate.Version] main  HHH000412: Hibernate Core {4.3.7.Final}
+2014-12-06 17:42:57,712 INFO [org.hibernate.cfg.Environment] main  HHH000206: hibernate.properties not found
+2014-12-06 17:42:57,715 INFO [org.hibernate.cfg.Environment] main  HHH000021: Bytecode provider name : javassist
+2014-12-06 17:42:58,143 INFO [org.hibernate.annotations.common.Version] main  HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2014-12-06 17:42:58,215 WARN [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] main  HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-12-06 17:42:58,221 INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] main  HHH000401: using driver [org.h2.Driver] at URL [jdbc:h2:~/test]
+2014-12-06 17:42:58,224 INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] main  HHH000046: Connection properties: {user=user, password=****}
+2014-12-06 17:42:58,224 INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] main  HHH000006: Autocommit mode: false
+2014-12-06 17:42:58,227 INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] main  HHH000115: Hibernate connection pool size: 1 (min=1)
+2014-12-06 17:42:58,672 INFO [org.hibernate.dialect.Dialect] main  HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2014-12-06 17:42:59,118 INFO [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] main  HHH000397: Using ASTQueryTranslatorFactory
+2014-12-06 17:42:59,697 INFO [org.hibernate.tool.hbm2ddl.SchemaExport] main  HHH000227: Running hbm2ddl schema export
+2014-12-06 17:42:59,742 INFO [org.hibernate.tool.hbm2ddl.SchemaExport] main  HHH000230: Schema export complete
+2014-12-06 17:42:59,927 INFO [org.mentoring.Client] main  Creating unit
+2014-12-06 17:42:59,971 INFO [org.mentoring.Client] main  created unit: id 10; name TestUnit
+2014-12-06 17:42:59,971 INFO [org.mentoring.Client] main  Creating  First Project
+2014-12-06 17:42:59,973 INFO [org.mentoring.Client] main  created project: id 20; name First Project
+2014-12-06 17:42:59,973 INFO [org.mentoring.Client] main  Creating  Second Project
+2014-12-06 17:42:59,973 INFO [org.mentoring.Client] main  created project: id 21; name Second Project
+2014-12-06 17:42:59,973 INFO [org.mentoring.Client] main  Creating  First Employee
+2014-12-06 17:42:59,977 INFO [org.mentoring.Client] main  created employee: Id 30; first_name John ; last_name Smith ; status FULL_TIME_EMPLOYEE ; address city City1; street Street1 ; personal_info id 40; characteristics Personal info ; unit null ; projects: []
+2014-12-06 17:42:59,977 INFO [org.mentoring.Client] main  Creating  Second Employee
+2014-12-06 17:42:59,978 INFO [org.mentoring.Client] main  created employee: Id 31; first_name Bill ; last_name Brown ; status PART_TIME_EMPLOYEE ; address city City2; street Street2 ; personal_info id 41; characteristics Second Personal info ; unit null ; projects: []
+2014-12-06 17:42:59,978 INFO [org.mentoring.Client] main  Assign employees to projects
+2014-12-06 17:42:59,982 INFO [org.mentoring.Client] main  first employee: Id 30; first_name John ; last_name Smith ; status FULL_TIME_EMPLOYEE ; address city City1; street Street1 ; personal_info id 40; characteristics Personal info ; unit null ; projects: [id 20; name First Project]
+2014-12-06 17:42:59,982 INFO [org.mentoring.Client] main  second employee: Id 31; first_name Bill ; last_name Brown ; status PART_TIME_EMPLOYEE ; address city City2; street Street2 ; personal_info id 41; characteristics Second Personal info ; unit null ; projects: [id 21; name Second Project]
+2014-12-06 17:42:59,982 INFO [org.mentoring.Client] main  Assign employees to unit
+2014-12-06 17:42:59,982 INFO [org.mentoring.Client] main  first employee: Id 30; first_name John ; last_name Smith ; status FULL_TIME_EMPLOYEE ; address city City1; street Street1 ; personal_info id 40; characteristics Personal info ; unit id 10; name TestUnit ; projects: [id 20; name First Project]
+2014-12-06 17:42:59,983 INFO [org.mentoring.Client] main  second employee: Id 31; first_name Bill ; last_name Brown ; status PART_TIME_EMPLOYEE ; address city City2; street Street2 ; personal_info id 41; characteristics Second Personal info ; unit id 10; name TestUnit ; projects: [id 21; name Second Project]
+2014-12-06 17:42:59,983 INFO [org.mentoring.Client] main  Update unit name
+2014-12-06 17:42:59,987 INFO [org.mentoring.Client] main  updated unit: id 10; name Updated name
+2014-12-06 17:42:59,987 INFO [org.mentoring.Client] main  Update project
+2014-12-06 17:42:59,988 INFO [org.mentoring.Client] main  updated project: id 20; name Updated name
+2014-12-06 17:42:59,988 INFO [org.mentoring.Client] main  Update emploeey first name
+2014-12-06 17:42:59,989 INFO [org.mentoring.Client] main  updated employee: Id 30; first_name Updated name ; last_name Smith ; status FULL_TIME_EMPLOYEE ; address city City1; street Street1 ; personal_info id 40; characteristics Personal info ; unit id 10; name Updated name ; projects: [id 20; name Updated name]
+2014-12-06 17:42:59,989 INFO [org.mentoring.Client] main  Delete first project: id 20; name Updated name
+2014-12-06 17:42:59,993 INFO [org.mentoring.Client] main  First project: null
+2014-12-06 17:42:59,993 INFO [org.mentoring.Client] main  First employee: Id 30; first_name Updated name ; last_name Smith ; status FULL_TIME_EMPLOYEE ; address city City1; street Street1 ; personal_info id 40; characteristics Personal info ; unit id 10; name Updated name ; projects: []
+2014-12-06 17:42:59,993 INFO [org.mentoring.Client] main  Deelete second employee:
+2014-12-06 17:42:59,993 INFO [org.mentoring.Client] main  Second employee: null
+2014-12-06 17:42:59,993 INFO [org.mentoring.Client] main  Delete unit
+2014-12-06 17:42:59,995 INFO [org.mentoring.Client] main  Unit: null
+2014-12-06 17:42:59,995 INFO [org.mentoring.Client] main  First employee: null
+2014-12-06 17:42:59,999 INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] main  HHH000030: Cleaning up connection pool [jdbc:h2:~/test]
