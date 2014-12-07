@@ -1,0 +1,44 @@
+12-07 08:00:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EMPLOYEE" не найдена
+Table "EMPLOYEE" not found; SQL statement:
+alter table EMPLOYEE drop constraint FK_9lejd68rehareqmahyjmkawjw if exists [42102-182]
+12-07 08:00:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "PERSONALINFO" не найдена
+Table "PERSONALINFO" not found; SQL statement:
+alter table PERSONALINFO drop constraint FK_j8692e5at88uc9geg0ynh0ps4 if exists [42102-182]
+12-07 08:00:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EMPLOYEE_PROJECTS" не найдена
+Table "EMPLOYEE_PROJECTS" not found; SQL statement:
+alter table employee_projects drop constraint FK_kyin9obv8psfux5f7fuevhbmp if exists [42102-182]
+12-07 08:00:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EMPLOYEE_PROJECTS" не найдена
+Table "EMPLOYEE_PROJECTS" not found; SQL statement:
+alter table employee_projects drop constraint FK_2nwstosfjjbjgkkh9gdb6o771 if exists [42102-182]
+12-07 08:00:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Последовательность "HIBERNATE_SEQUENCE" не найдена
+Sequence "HIBERNATE_SEQUENCE" not found; SQL statement:
+drop sequence hibernate_sequence [90036-182]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.DropSequence.update(DropSequence.java:45)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:130)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:115)
+	at org.hibernate.tool.hbm2ddl.DatabaseExporter.export(DatabaseExporter.java:64)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.perform(SchemaExport.java:418)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.execute(SchemaExport.java:372)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.create(SchemaExport.java:304)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.create(SchemaExport.java:293)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:517)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1859)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:852)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:845)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:398)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:844)
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:39)
+	at org.mentoring.Client.main(Client.java:28)

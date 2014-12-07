@@ -1,0 +1,78 @@
+12-04 17:13:28 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "TEST" уже существует
+Table "TEST" already exists; SQL statement:
+CREATE TABLE TEST(id INT PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), status VARCHAR(255),  city VARCHAR(255), street VARCHAR(255), personal_info_id INT, unit_id INT) [42101-182]
+12-04 17:20:58 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "ENUM_ATTR"
+Unknown data type: "ENUM_ATTR"; SQL statement:
+CREATE TABLE TEST(id INT PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), status ENUM_ATTR VARCHAR(255) CHECK ENUM_ATR IN ('FULL_TIME_EMPLOYEE','PART_TIME_EMPLOYEE'),  city VARCHAR(255), street VARCHAR(255), personal_info_id INT, unit_id INT) [50004-182]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3982)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3845)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5752)
+	at org.h2.command.Parser.parseCreate(Parser.java:4141)
+	at org.h2.command.Parser.parsePrepared(Parser.java:350)
+	at org.h2.command.Parser.parse(Parser.java:305)
+	at org.h2.command.Parser.parse(Parser.java:277)
+	at org.h2.command.Parser.prepareCommand(Parser.java:242)
+	at org.h2.engine.Session.prepareLocal(Session.java:446)
+	at org.h2.engine.Session.prepareCommand(Session.java:388)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1190)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+12-06 11:17:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "19L[*]OGITECH82
+DROP TABLE IF EXISTS PERSONALINFO "
+Syntax error in SQL statement "19L[*]OGITECH82
+DROP TABLE IF EXISTS PERSONALINFO "; SQL statement:
+19Logitech82
+DROP TABLE IF EXISTS PERSONALINFO [42000-182]
+12-06 11:17:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "PERSONALINFO" уже существует
+Table "PERSONALINFO" already exists; SQL statement:
+CREATE TABLE PERSONALINFO(id INT PRIMARY KEY,  characteristics VARCHAR(255)) [42101-182]
+12-06 11:19:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EMPLOYEE_PROJECTS" не найдена
+Table "EMPLOYEE_PROJECTS" not found; SQL statement:
+alter table employee_projects drop constraint FK_kyin9obv8psfux5f7fuevhbmp if exists [42102-182]
+12-06 11:19:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EMPLOYEE_PROJECTS" не найдена
+Table "EMPLOYEE_PROJECTS" not found; SQL statement:
+alter table employee_projects drop constraint FK_2nwstosfjjbjgkkh9gdb6o771 if exists [42102-182]
+12-06 11:23:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Последовательность "HIBERNATE_SEQUENCE" не найдена
+Sequence "HIBERNATE_SEQUENCE" not found; SQL statement:
+drop sequence hibernate_sequence [90036-182]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.DropSequence.update(DropSequence.java:45)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:130)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:115)
+	at org.hibernate.tool.hbm2ddl.DatabaseExporter.export(DatabaseExporter.java:64)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.perform(SchemaExport.java:418)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.execute(SchemaExport.java:372)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.create(SchemaExport.java:304)
+	at org.hibernate.tool.hbm2ddl.SchemaExport.create(SchemaExport.java:293)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:517)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1859)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:852)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:845)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:398)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:844)
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:39)
+	at org.mentoring.Client.main(Client.java:16)
