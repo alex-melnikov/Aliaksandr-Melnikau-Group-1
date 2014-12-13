@@ -18,12 +18,11 @@ public class Item implements Entity {
     
     private Double price;
 
-    @Override
+   
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

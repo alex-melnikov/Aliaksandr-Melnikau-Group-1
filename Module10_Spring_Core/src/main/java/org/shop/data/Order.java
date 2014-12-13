@@ -18,12 +18,10 @@ public class Order implements Entity {
     
     private Date createdDate;
 
-    @Override
-    public Long getId() {
+     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

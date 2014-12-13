@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/util
+                        http://www.springframework.org/schema/util/spring-util.xsd">
+	<description>
+		This configuration file will have all beans
+		which
+		represents initializers.
+	</description>
+	<util:map id="sellerMap" map-class="java.util.HashMap">
+		<entry key="1" value="org.shop.common.Sellers.AMAZON" />
+		<entry key="2" value="org.shop.common.Sellers.SAMSUNG" />
+		<entry key="3" value="Apple" />
+	</util:map>
+	<!-- SellerInitializer -->
+	<bean id="sellerInitializer" class="org.shop.SellerInitializer">
+		<constructor-arg ref="sellerMap" />
+		<property name="sellerService" ref="sellerService"/>
+	</bean>
+	<!-- ProposalInitializer -->
+	<bean id="proposalInitializer" class="org.shop.ProposalInitializer"
+		autowire="byName" />
+	<!-- ProductInitializer -->
+	<bean id="productInitializer" class="org.shop.ProductInitializer">
+		<constructor-arg ref="productService" />
+	</bean>
+	<!-- DataInitializer -->
+	<bean id="dataInitializer" class="org.shop.DataInitializer"
+		init-method="initData"
+		depends-on="sellerInitializer,proposalInitializer,productInitializer,userInitializer">
+		<property name="sellerInitializer" ref="sellerInitializer" />
+		<property name="userInitializer" ref="userInitializer" />
+		<property name="productInitializer" ref="productInitializer" />
+		<property name="proposalInitializer" ref="proposalInitializer" />
+	</bean>
+	<!-- DataInitializer -->
+	<bean id="userInitializer" class="org.shop.UserInitializer">
+		<constructor-arg ref="userService" />
+	</bean>
+</beans>

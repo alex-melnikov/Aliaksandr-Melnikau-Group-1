@@ -16,52 +16,37 @@ import org.shop.repository.map.AbstractMapRepository;
  * @see User
  */
 public final class UserRepositoryFactory {
-    
-    /**
-     * Creates a new UserRepository instance.
-     *
-     * @return the user repository
-     */
-    public UserRepository createUserRepository() {
-        return new UserMapRepository();
-    }
-    
-    /**
-     * 
-     * @author Dzmitry_Naskou
-     */
-    private class UserMapRepository extends AbstractMapRepository<User> implements UserRepository {
 
-        /* (non-Javadoc)
-         * @see org.shop.repository.UserRepository#getUserById(java.lang.Long)
-         */
-        @Override
-        public User getUserById(Long id) {
-            return get(id);
-        }
+	/**
+	 * Creates a new UserRepository instance.
+	 * 
+	 * @return the user repository
+	 */
+	public UserRepository createUserRepository() {
+		return new UserMapRepository();
+	}
 
-        /* (non-Javadoc)
-         * @see org.shop.repository.UserRepository#createUser(org.shop.data.User)
-         */
-        @Override
-        public Long createUser(User user) {
-            return create(user);
-        }
+	/**
+	 * 
+	 * @author Dzmitry_Naskou
+	 */
+	private class UserMapRepository extends AbstractMapRepository<User>
+			implements UserRepository {
 
-        /* (non-Javadoc)
-         * @see org.shop.repository.UserRepository#updateUser(org.shop.data.User)
-         */
-        @Override
-        public void updateUser(User user) {
-            update(user);
-        }
+		public User getUserById(Long id) {
+			return get(id);
+		}
 
-        /* (non-Javadoc)
-         * @see org.shop.repository.UserRepository#getUsers()
-         */
-        @Override
-        public List<User> getUsers() {
-            return new ArrayList<User>(register.values());
-        }
-    }
+		public Long createUser(User user) {
+			return create(user);
+		}
+
+		public void updateUser(User user) {
+			update(user);
+		}
+
+		public List<User> getUsers() {
+			return new ArrayList<User>(register.values());
+		}
+	}
 }

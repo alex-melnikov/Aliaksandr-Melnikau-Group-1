@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+	<description>
+		This configuration file will have all beans
+		which
+		represents services.
+	</description>
+	<!-- ItemService -->
+	<bean id="itemService" class="org.shop.api.impl.ItemServiceImpl">
+		<constructor-arg ref="itemMapRepository" />
+	</bean>
+	<!-- SellerService -->
+	<bean id="sellerService" class="org.shop.api.impl.SellerServiceImpl"
+		autowire="byType" />
+	<!-- ProductService -->
+	<bean id="productService" class="org.shop.api.impl.ProductServiceImpl"
+		autowire="constructor" />
+	<!-- UserService -->
+	<bean id="userService" class="org.shop.api.impl.UserServiceImpl">
+	<property name="repository" ref="userRepository"/>
+	</bean>
+	<!-- ProposalService -->
+	<bean id="proposalService" class="org.shop.api.impl.ProposalServiceImpl">
+		<constructor-arg ref="proposalMapRepository" />
+		<property name="sellerService" ref="sellerService" />
+		<property name="productService" ref="productService" />
+	</bean>
+</beans>

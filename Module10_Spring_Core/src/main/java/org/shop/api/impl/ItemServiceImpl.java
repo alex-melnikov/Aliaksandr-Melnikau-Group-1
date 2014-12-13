@@ -21,26 +21,14 @@ public class ItemServiceImpl implements ItemService {
         this.repository = repository;
     }
 
-    /* (non-Javadoc)
-     * @see org.shop.api.impl.ItemService#createItem(org.shop.data.Item)
-     */
-    @Override
     public Long createItem(Item item) {
         return repository.createItem(item);
     }
 
-    /* (non-Javadoc)
-     * @see org.shop.api.impl.ItemService#deleteItem(java.lang.Long)
-     */
-    @Override
     public void deleteItem(Long itemId) {
         repository.deleteItem(itemId);
     }
 
-    /* (non-Javadoc)
-     * @see org.shop.api.impl.ItemService#getItemsByOrderId(java.lang.Long)
-     */
-    @Override
     public List<Item> getItemsByOrderId(Long orderId) {
         return repository.getItemsByOrderId(orderId);
     }

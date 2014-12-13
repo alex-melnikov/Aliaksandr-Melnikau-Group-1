@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.shop.api.ItemService;
 import org.shop.api.OrderService;
 import org.shop.data.Item;
@@ -12,6 +14,7 @@ import org.shop.data.Proposal;
 import org.shop.data.User;
 import org.shop.repository.OrderRepository;
 
+@Resource(name="orderService")
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
@@ -26,7 +29,6 @@ public class OrderServiceImpl implements OrderService {
         this.itemService = itemService;
     }
 
-    @Override
     public Long createOrder(User user, Item... items) {
         //create and save order object
         Order order = new Order();
@@ -58,22 +60,18 @@ public class OrderServiceImpl implements OrderService {
         return createOrder(user, items.toArray(new Item[items.size()]));
     }
 
-    @Override
     public Order getOrderById(Long id) {
         return orderRepository.getOrderById(id);
     }
 
-    @Override
     public void updateOrder(Order order) {
         orderRepository.updateOrder(order);
     }
 
-    @Override
     public List<Order> getOrdersByUser(User user) {
         return getOrdersByUserId(user.getId());
     }
 
-    @Override
     public List<Order> getOrdersByUserId(Long userId) {
         return orderRepository.getOrdersByUserId(userId);
     }
