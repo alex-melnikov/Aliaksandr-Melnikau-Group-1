@@ -7,6 +7,9 @@
 	<description>
 		This configuration file will.
 	</description>
+	<context:annotation-config/>
+	<context:component-scan
+	base-package="org.shop.api.impl,org.shop.repository.map"/>
 	<import resource="classpath:xml-repositorу-config.xml" />
 	<import resource="classpath:xml-service-config.xml" />
 	<import resource="classpath:xml-initializers-config.xml" />
